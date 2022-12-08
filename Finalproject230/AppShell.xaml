@@ -35,9 +35,7 @@
                     <Label
                         IsVisible="false"
                         Text="{Binding solarData.ValidPacket}"/>
-                    <Button
-                        Text="{Binding solarData.OpenText}"
-                        Command="{Binding OpenCloseCommand}"/>
+                    
                 </VerticalStackLayout>
             </HorizontalStackLayout>
         </Grid>

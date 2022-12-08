@@ -22,14 +22,14 @@ namespace Finalproject230.ViewModel
         {
             serialPort.BaudRate = 115200;
             serialPort.ReceivedBytesThreshold = 1;
-            serialPort.DataReceived += SerialPort_DataReceived;
-            solarData.OpenText = "Open";
+            //serialPort.DataReceived += SerialPort_DataReceived;
+            //solarData.OpenText = "Open";
         }
 
-        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            solarData.ValidPacket = solarData.getValidPacket(serialPort.ReadLine());
-        }
+        //private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    solarData.ValidPacket = solarData.getValidPacket(serialPort.ReadLine());
+        //}
 
         [RelayCommand]
         void OpenClose()
@@ -38,13 +38,13 @@ namespace Finalproject230.ViewModel
             {
                 serialPort.PortName = "COM6";
                 serialPort.Open();
-                solarData.OpenText = "Close";
+                //solarData.OpenText = "Close";
                 bPortOpen = true;
             }
             else
             {
                 serialPort.Close();
-                solarData.OpenText = "Open";
+                //solarData.OpenText = "Open";
                 bPortOpen = false;
             }
         }

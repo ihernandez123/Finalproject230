@@ -8,8 +8,5 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(View.MainPage), typeof(View.MainPage));
     }
 
-    private void btnOpenClose_Clicked(object sender, EventArgs e)
-    {
-
-    }
+    
 }
