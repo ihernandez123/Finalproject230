@@ -3,33 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Finalproject230.ViewModel"
              x:Class="Finalproject230.View.RawDataView"
-             Title="RawDataView"
-             x:DataType="viewmodels:MainViewModel">
+             Title="Raw Data View"
+             RotationX="3"
+             x:DataType="viewmodels:MainViewModel"
+             >
 
     <HorizontalStackLayout
         Spacing="25"
-        Padding="200,75,0,100"
+        Padding="60,200,0,210"
         BackgroundColor="Orange"
-        VerticalOptions="StartAndExpand">
+        VerticalOptions="StartAndExpand"
+        >
+        <Polygon
+            Points="40,10 70,80 10,50"
+            Fill="White"
+            Stroke="White"
+            StrokeThickness="5"
+            StrokeDashArray="2"/>
         <VerticalStackLayout>
             <HorizontalStackLayout>
                 <Button
 		            x:Name="btnOpenClose"
-                    Padding="13"
-		            Text="Open"
+                    Padding="24.5"
+		            Text="OPEN"
                     BackgroundColor="ForestGreen"
                     SemanticProperties.Hint="Open Comport"
 		            Clicked="btnOpenClose_Clicked"/>
-                <Button
-		            x:Name="btnClear"                        
-                    Padding="13"
-		            Text="Clear"
-                    BackgroundColor="ForestGreen"
-                    SemanticProperties.Hint="Clear Serial Data"
-		            Clicked="btnClear_Clicked"/>
+                
                 <Picker
 		            x:Name="portPicker"
-                    Title=" COM Selected"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Title=" Select the comport!"
                     HorizontalOptions="Center"
                     TitleColor="Black"/>
             </HorizontalStackLayout>
@@ -63,54 +68,18 @@
                     />
             </HorizontalStackLayout>
 
+            <Button
+		            x:Name="btnClear"                        
+                    Padding="13"
+		            Text="Clear"
+                    BackgroundColor="ForestGreen"
+                    SemanticProperties.Hint="Clear Serial Data"
+		            Clicked="btnClear_Clicked"/>
+
 
         </VerticalStackLayout>
 
         <VerticalStackLayout>
-
-            <Label  FontSize="Medium" TextColor="Black" TextDecorations="Underline" >Data</Label>
-
-            <HorizontalStackLayout>
-                <Label Text="Solar Voltage" TextColor="Black"/>
-                <Label x:Name="labelSolarVolt" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"/>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Label Text="Battery Voltage" TextColor="Black"/>
-                <Label x:Name="labelBatteryVolt" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"/>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Label Text="POT Voltage" TextColor="Black"/>
-                <Label x:Name="labelPotVolt" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"                       />
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Label Text="Battery Current " TextColor="Black"/>
-                <Label x:Name="labelBatteryCurrent" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"/>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Label Text="LED 1 Current" TextColor="Black"/>
-                <Label x:Name="labelLed1Current" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"/>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Label Text="LED 2 Current" TextColor="Black"/>
-                <Label x:Name="labelLed2Current" MinimumWidthRequest="40"
-                       TextColor="LightGoldenrodYellow"
-                       TextDecorations="Underline"                       />
-            </HorizontalStackLayout>
 
             <Label
                 TextColor="Black"  TextDecorations="Underline"  FontSize="Medium"
@@ -121,6 +90,7 @@
                 <Label MinimumWidthRequest="110" TextColor="Black">Number</Label>
                 <Label x:Name="labelPacketNum"
                        TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
@@ -128,55 +98,63 @@
                 <Label MinimumWidthRequest="110" TextColor="Black">Length</Label>
                 <Label x:Name="labelPacketLength"
                        TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 0</Label>
                 <Label x:Name="labelAN0"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 1</Label>
                 <Label x:Name="labelAN1"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 2</Label>
                 <Label x:Name="labelAN2"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 3</Label>
                 <Label x:Name="labelAN3"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 4</Label>
                 <Label x:Name="labelAN4"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Analog 5</Label>
                 <Label x:Name="labelAN5"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Binary</Label>
                 <Label x:Name="labelBin"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
@@ -184,39 +162,43 @@
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Received</Label>
                 <Label x:Name="labelRxChkSum"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Calculated</Label>
                 <Label x:Name="labelCalChkSum"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Packet Lost</Label>
                 <Label x:Name="labelPacketLost"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Chk Sum Error</Label>
                 <Label x:Name="labelChkSumError"
-                           TextColor="LightGoldenrodYellow"
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label MinimumWidthRequest="110" TextColor="Black">Rollover</Label>
-                <Label x:Name="labelPacketRollover"
-                           TextColor="LightGoldenrodYellow"
+                <Label x:Name="labelPacketRollover"           
+                       TextColor="LightGoldenrodYellow"
+                       FontAttributes="Bold"
                        TextDecorations="Underline"/>
             </HorizontalStackLayout>
 
-            
         </VerticalStackLayout>
 
 
@@ -225,7 +207,7 @@
             <HorizontalStackLayout>
                 <Button
 		            x:Name="btnSend"
-		            Text="Send"
+		            Text="SEND"
                     Padding="10"
                     BackgroundColor="ForestGreen"
 		            Clicked="btnSend_Clicked"
@@ -237,35 +219,77 @@
                     FontSize="Medium"
                     HorizontalOptions="Center"/>
             </HorizontalStackLayout>
-            
-            <HorizontalStackLayout>
-                <Label
-                TextColor="Orange"  TextDecorations="Underline"  FontSize="Medium"
-                HorizontalTextAlignment="Start"
-                >Solar Panel Schematic</Label>
-            </HorizontalStackLayout>
-            
-            <HorizontalStackLayout>
-                <Label
-                TextColor="Black"  TextDecorations="Underline"  FontSize="Medium"
-                HorizontalTextAlignment="Start"
-                >Solar Panel Schematic</Label>
-            </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-            <Image
-                    x:Name="SolarPanelSchematic"
-                    Source="picture1.png"
-                    HeightRequest="500"
-                    WidthRequest="600"
+                <Label
+	                Text="Received Packet History"
+                    HorizontalOptions="Center"
+                    TextColor="Black"/>
+                <CheckBox
+	                x:Name="CheckedBoxHistory"
+	                IsChecked="False"
+                    HorizontalOptions="Center"
+                    Color="Aqua"
+                    BackgroundColor="WhiteSmoke"/>
+                <Label
+                    Padding="100,0,0,0"
+		            Text="Parsed Packet History"
+                    TextColor="Black"/>
+                <CheckBox
+	                x:Name="CheckedParsedBoxHistory"
+	                IsChecked="False"
+                    HorizontalOptions="Center"
+                    Color="Aqua"/>
+            </HorizontalStackLayout>
+            <Label
+	                Text="Received Packet"
+                    TextColor="Black"
+                    TextDecorations="Underline"
+                    FontSize="Medium"/>
+            <ScrollView
+	                x:Name="scrollViewRecData"
+	                MaximumHeightRequest="500"
+	                VerticalOptions="StartAndExpand">
+                <Label
+		            x:Name="labelRXdata"
+		            Text="Received Packet"
+		            MinimumWidthRequest="310"
+                    TextColor="LightGoldenrodYellow"
+                    FontAttributes="Bold"
+                    TextDecorations="Underline"
                     />
-                
+            </ScrollView>
+            <Label
+	                Text="Parsed Packet"
+                    TextColor="Black"
+                    TextDecorations="Underline"
+                    FontSize="Medium"/>
+            <HorizontalStackLayout>
+                <Label
+                    FontFamily="monospace"
+                    TextColor="Black"
+                    FontAutoScalingEnabled="False"
+	                Text="Length    Header    Number    Analog0    Analog1    Analog2    Analog3    Analog4    Analog5   Binary   CkSumRX  CkSumCal      Lost      ChkError  Rollover"
+                    HorizontalOptions="Center"/>
             </HorizontalStackLayout>
-            
-            
+
+            <ScrollView
+	                x:Name="scrollViewParsedData"
+	                MaximumHeightRequest="500"
+	                VerticalOptions="StartAndExpand">
+                <Label
+		            x:Name="labelParsedData"
+                    FontFamily="monospace"
+                    FontAutoScalingEnabled="False"
+		            Text="Parsed Packet"
+		            MinimumWidthRequest="400"
+                    TextColor="LightGoldenrodYellow"
+                    FontAttributes="Bold"
+                    TextDecorations="Underline"/>
+            </ScrollView>
 
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
 
     </HorizontalStackLayout>
 

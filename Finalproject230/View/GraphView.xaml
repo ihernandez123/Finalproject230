@@ -2,15 +2,363 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Finalproject230.ViewModel"
+             xmlns:drawables="clr-namespace:Finalproject230.Models"
              x:Class="Finalproject230.View.GraphView"
-             Title="GraphView"
-             x:DataType="viewmodels:MainViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to GraphView!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label
-            Text="{Binding solarData.ValidPacket}"/>
-    </VerticalStackLayout>
+             Title="Solar Line Graph"
+             x:DataType="viewmodels:MainViewModel"
+             RotationX="3"
+             >
+
+    <ContentPage.Resources>
+        <drawables:LineDrawable x:Key="lineDrawable"/>
+        <PointCollection x:Key="pointCollection"/>
+    </ContentPage.Resources>
+
+    <HorizontalStackLayout
+        Spacing="25"
+        Padding="100,90,0,100"
+        BackgroundColor="Orange"
+        VerticalOptions="StartAndExpand">
+        <Polygon
+            Points="40,10 70,80 10,50"
+            Fill="White"
+            Stroke="White"
+            StrokeThickness="5"
+            StrokeDashArray="2"/>
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Button
+		            x:Name="btnOpenClose"
+                    Padding="24"
+		            Text="OPEN"
+                    BackgroundColor="ForestGreen"
+                    SemanticProperties.Hint="Open Comport"
+		            Clicked="btnOpenClose_Clicked"/>
+
+                <Picker
+                    TextColor="White"
+                    FontAttributes="Bold"
+		            x:Name="portPicker"
+                    Title=" Select the comport!"
+                    HorizontalOptions="Center"
+                    TitleColor="Black"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="Bits! "
+                        TextColor="Black"
+                        FontSize="Medium"/>
+                <Button x:Name="btnBit0"  Text="1"  FontSize="Medium"  Clicked="btnBit0_Clicked"  BackgroundColor="ForestGreen"/>
+                <Button x:Name="btnBit1"  Text="1"  FontSize="Medium"  Clicked="btnBit1_Clicked"  BackgroundColor="ForestGreen"/>
+                <Button x:Name="btnBit2"  Text="1"  FontSize="Medium"  Clicked="btnBit2_Clicked"  BackgroundColor="ForestGreen"/>
+                <Button x:Name="btnBit3"  Text="1"  FontSize="Medium"  Clicked="btnBit3_Clicked"  BackgroundColor="ForestGreen"/>
+
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <ImageButton
+                    x:Name="imgLED1"
+                    Source="ledoff.png"
+                    HeightRequest="200"
+                    WidthRequest="108"
+                    Clicked="imgLED1_Clicked"
+                    />
+                <ImageButton
+                    x:Name="imgLED2"
+                    Source="ledoff.png"
+                    HeightRequest="200"
+                    WidthRequest="108"
+                    Clicked="imgLED2_Clicked"
+                    />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Button
+		            x:Name="btnSend"
+		            Text="SEND"
+                    Padding="12.5"
+                    BackgroundColor="ForestGreen"
+		            Clicked="btnSend_Clicked"
+                    HorizontalOptions="Center"/>
+                <Entry
+		            x:Name="entrySend"
+		            Text="###1111196"
+                    TextColor="LightGoldenrodYellow"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <Label  FontSize="Medium" TextColor="Black" TextDecorations="Underline" >Data</Label>
+
+            <HorizontalStackLayout>
+                <Label Text="Solar Voltage: " TextColor="Black"/>
+                <Label x:Name="labelSolarVolt" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Battery Voltage: " TextColor="Black"/>
+                <Label x:Name="labelBatteryVolt" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="POT Voltage: " TextColor="Black"/>
+                <Label x:Name="labelPotVolt" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"                       
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Battery Current: " TextColor="Black"/>
+                <Label x:Name="labelBatteryCurrent" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="LED 1 Current: " TextColor="Black"/>
+                <Label x:Name="labelLed1Current" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="LED 2 Current: " TextColor="Black"/>
+                <Label x:Name="labelLed2Current" MinimumWidthRequest="40"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"                       
+                       FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+
+            <Button
+		            x:Name="btnClear"                        
+                    Padding="13"
+		            Text="Clear"
+                    BackgroundColor="ForestGreen"
+                    SemanticProperties.Hint="Clear Serial Data"
+		            Clicked="btnClear_Clicked"/>
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout 
+            IsVisible="false">
+
+            
+            <Label
+                TextColor="Black"  TextDecorations="Underline"  FontSize="Medium"
+                HorizontalTextAlignment="Start"
+                >Packet</Label>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Number</Label>
+                <Label x:Name="labelPacketNum"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Length</Label>
+                <Label x:Name="labelPacketLength"
+                       TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 0</Label>
+                <Label x:Name="labelAN0"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 1</Label>
+                <Label x:Name="labelAN1"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 2</Label>
+                <Label x:Name="labelAN2"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 3</Label>
+                <Label x:Name="labelAN3"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 4</Label>
+                <Label x:Name="labelAN4"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Analog 5</Label>
+                <Label x:Name="labelAN5"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Binary</Label>
+                <Label x:Name="labelBin"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <Label  FontSize="Medium" TextColor="Black" TextDecorations="Underline" >Checksum</Label>
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Received</Label>
+                <Label x:Name="labelRxChkSum"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Calculated</Label>
+                <Label x:Name="labelCalChkSum"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Packet Lost</Label>
+                <Label x:Name="labelPacketLost"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Chk Sum Error</Label>
+                <Label x:Name="labelChkSumError"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label MinimumWidthRequest="110" TextColor="Black">Rollover</Label>
+                <Label x:Name="labelPacketRollover"
+                           TextColor="LightGoldenrodYellow"
+                       TextDecorations="Underline"/>
+            </HorizontalStackLayout>
+
+            
+
+        </VerticalStackLayout>
+
+
+
+        <VerticalStackLayout>
+            
+            
+            <HorizontalStackLayout>
+                <Label
+                    Text="Solar Panel Graph"
+                    TextColor="Black"
+                    TextDecorations="Underline"
+                    FontSize="Large"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="Legend "
+                        TextColor="Black"
+                    TextDecorations="Underline"
+                    FontSize="Medium"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+            <VerticalStackLayout>
+                
+            
+                
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Solar Voltage (V)  "
+                        TextColor="Red"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Battery Voltage (V)  "
+                        TextColor="Blue"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Pot Voltage (V)  "
+                        TextColor="Green"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="   X Axis  "
+                        TextColor="Black"
+                        />
+            </HorizontalStackLayout>
+                
+                </VerticalStackLayout>
+            
+            <VerticalStackLayout
+                Padding="300,0,0,0">
+                
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Led 1 Current (mA)  "
+                        TextColor="DeepSkyBlue"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Led 2 Current (mA)  "
+                        TextColor="Purple"
+                        />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label
+                        Text="   RED = Battery Current (mA)  "
+                        TextColor="White"
+                        />
+            </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+    </HorizontalStackLayout>
+            
+            
+    <HorizontalStackLayout>
+                <GraphicsView Drawable="{StaticResource lineDrawable}"
+                              x:Name="LineGraphView"
+                              HeightRequest="1000"
+                              WidthRequest="1000">
+
+                </GraphicsView>
+            </HorizontalStackLayout>
+
+
+
+        </VerticalStackLayout>
+
+    </HorizontalStackLayout>
+
 </ContentPage>

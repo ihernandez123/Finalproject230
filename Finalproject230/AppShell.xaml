@@ -4,26 +4,40 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:Finalproject230.ViewModel"
+    xmlns:models="clr-namespace:Finalproject230.Models"
     xmlns:local="clr-namespace:Finalproject230.View"
     Shell.FlyoutBehavior="Flyout"
-    x:DataType="viewmodels:MainViewModel">
-
+    x:DataType="viewmodels:MainViewModel"
+    BackgroundColor="Orange"
+    FlyoutBackgroundColor="Orange"
+    StyleClass="10"
+    SizeChanged="Label_SizeChanged"
+    Shell.TabBarIsVisible="False"
+    >  
+    
     <Shell.BindingContext>
         <viewmodels:MainViewModel/>
     </Shell.BindingContext>
 
-    <FlyoutItem Title="Solar Data">
+    <FlyoutItem Title="1. Welcome!"
+                >
         <ShellContent
             Title="Home"
-            ContentTemplate="{DataTemplate local:MainPage}"/>
+            StyleClass="5"
+            ContentTemplate="{DataTemplate local:Welcome}"/>
     </FlyoutItem>
-    <FlyoutItem Title="Solar Line Graph">
+    
+    <FlyoutItem Title="2. Raw Data View">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:RawDataView}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="3. Solar Line Graph">
         <ShellContent
             ContentTemplate="{DataTemplate local:GraphView}"/>
     </FlyoutItem>
-    <FlyoutItem Title="Raw Data">
+    <FlyoutItem Title="4. Solar Data">
         <ShellContent
-            ContentTemplate="{DataTemplate local:RawDataView}"/>
+            ContentTemplate="{DataTemplate local:MainPage}"/>
     </FlyoutItem>
     <Shell.FlyoutFooter>
         <Grid HeightRequest="100" >
@@ -31,7 +45,18 @@
                 <VerticalStackLayout>
                     <Label
                         Text="Hello, USB"
-                        Padding="10,0"/>
+                        Padding="50,0"
+                        FontSize="Small"
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        />
+                    <Label
+                        Text="By: Italo Hernandez"
+                        Padding="50,0"
+                        FontSize="Small"
+                        HorizontalOptions="Start"
+                        TextColor="White"
+                        />
                     <Label
                         IsVisible="false"
                         Text="{Binding solarData.ValidPacket}"/>

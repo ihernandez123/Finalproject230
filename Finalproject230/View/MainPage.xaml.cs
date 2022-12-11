@@ -8,9 +8,10 @@ using Microsoft.Maui.Controls.Shapes;
 using System.Timers;
 using System.Threading;
 using Microsoft.Maui.Devices;
+using static Finalproject230.Models.SolarData;
+using Finalproject230.Models;
 
 namespace Finalproject230.View;
-
 
 public partial class MainPage : ContentPage
 {
@@ -32,8 +33,8 @@ public partial class MainPage : ContentPage
 
     SerialPort serialPort = new SerialPort();
 
-    int servo_pin = 3;
-    int position = 0;
+    SolarData solarData = new SolarData();
+
     public MainPage()
     {
         InitializeComponent();
@@ -48,7 +49,6 @@ public partial class MainPage : ContentPage
         //      }    
 
     }
-
     private void MainPage_Loaded(object sender, EventArgs e)
     {
         serialPort.BaudRate = 115200;
@@ -75,15 +75,15 @@ public partial class MainPage : ContentPage
     private void MyMainThreadCode()
     {
         //Code to run in the main thread
-        if (CheckedBoxHistory.IsChecked == true)
-        {
-            labelRXdata.Text = newPacket + labelRXdata.Text;
-        }
-        else
-        {
+        //if (CheckedBoxHistory.IsChecked == true)
+        //{
+        //    labelRXdata.Text = newPacket + labelRXdata.Text;
+        //}
+        //else
+        //{
 
-            labelRXdata.Text = newPacket;
-        }
+        //    labelRXdata.Text = newPacket;
+        //}
         labelPacketLength.Text = newPacket.Length.ToString();
         int calChkSum = 0;
         if (newPacket.Length > 37)
@@ -134,6 +134,7 @@ public partial class MainPage : ContentPage
                 int recChkSum = Convert.ToInt32(newPacket.Substring(34, 3));
                 if (recChkSum == calChkSum)
                 {
+                    DisplaySolarData(newPacket);
                     oldPacketNumber = newPacketNumber;
                 }
                 else
@@ -164,20 +165,30 @@ public partial class MainPage : ContentPage
 
 
 
-            if (CheckedParsedBoxHistory.IsChecked == true)
-            {
-                labelParsedData.Text = parsedData + labelParsedData.Text;
-            }
-            else
-            {
-                labelParsedData.Text = parsedData;
-            }
+            //if (CheckedParsedBoxHistory.IsChecked == true)
+            //{
+            //    labelParsedData.Text = parsedData + labelParsedData.Text;
+            //}
+            //else
+            //{
+            //    labelParsedData.Text = parsedData;
+            //}
 
         }
 
 
     }
 
+    private void DisplaySolarData(string validPacket)
+    {
+        solarData.ParseSolarData(validPacket);
+        labelSolarVolt.Text = solarData.GetVoltage(solarData.analogVoltage[0]);
+        labelBatteryVolt.Text = solarData.GetVoltage(solarData.analogVoltage[2]);
+        labelBatteryCurrent.Text = solarData.GetCurrent(solarData.analogVoltage[1], solarData.analogVoltage[2]);
+        labelLed1Current.Text = solarData.GetLedCurrent(solarData.analogVoltage[1], solarData.analogVoltage[4]);
+        labelLed2Current.Text = solarData.GetLedCurrent(solarData.analogVoltage[1], solarData.analogVoltage[3]);
+        labelPotVolt.Text = solarData.GetVoltage(solarData.analogVoltage[5]);
+    }
     private void btnOpenClose_Clicked(object sender, EventArgs e)
     {
         if (!bPortOpen)
@@ -197,7 +208,32 @@ public partial class MainPage : ContentPage
 
     private void btnClear_Clicked(object sender, EventArgs e)
     {
-
+        newPacket = "";
+        serialPort.Close();
+        btnOpenClose.Text = "Open";
+        bPortOpen = false;
+        labelPacketNum.Text = "0";
+        labelPacketLength.Text = "0";
+        labelAN0.Text = "0";
+        labelAN1.Text = "0";
+        labelAN2.Text = "0";
+        labelAN3.Text = "0";
+        labelAN4.Text = "0";
+        labelAN5.Text = "0";
+        labelBin.Text = "0";
+        labelRxChkSum.Text = "0";
+        labelCalChkSum.Text = "0";
+        labelPacketLost.Text = "0";
+        labelChkSumError.Text = "0";
+        labelPacketRollover.Text = "0";
+        oldPacketNumber = -1;
+        newPacketNumber = 0;
+        labelSolarVolt.Text = "  0.00V";
+        labelBatteryVolt.Text = "  0.00V";
+        labelPotVolt.Text = "  0.00V";
+        labelBatteryCurrent.Text = "  0.00mA";
+        labelLed1Current.Text = "  0.00mA";
+        labelLed2Current.Text = "  0.00mA";
     }
 
     private void btnSend_Clicked(object sender, EventArgs e)
@@ -220,7 +256,6 @@ public partial class MainPage : ContentPage
     {
         ButtonClicked(3);
     }
-
     private void btnBit2_Clicked(object sender, EventArgs e)
     {
         ButtonClicked(2);
