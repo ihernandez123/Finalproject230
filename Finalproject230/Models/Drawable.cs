@@ -20,60 +20,23 @@ namespace Finalproject230.Models
         public LineDrawable(): base()
         {
             lineGraphs[0] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.Red,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.Red,lineSize: 1,newGraph: true);
             lineGraphs[1] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.Blue,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.Blue,lineSize: 1,newGraph: true);
             lineGraphs[2] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.Green,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.Green,lineSize: 1,newGraph: true);
             lineGraphs[3] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.DeepSkyBlue,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.DeepSkyBlue,lineSize: 1,newGraph: true);
             lineGraphs[4] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.Purple,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.Purple,lineSize: 1,newGraph: true);
             lineGraphs[5] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 0,
-                Xaxis: 0,
-                lineColor: Colors.White,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 0,Xaxis: 0,lineColor: Colors.White,lineSize: 1,newGraph: true);
             lineGraphs[6] = new BaseGraphData
-                (Yaxis: 0,
-                Yaxis1: 350,
-                Xaxis: 0,
-                lineColor: Colors.Black,
-                lineSize: 1,
-                newGraph: true);
+                (Yaxis: 0,Yaxis1: 350,Xaxis: 0,lineColor: Colors.Black,lineSize: 1,newGraph: true);
         }
-
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
             Random random = new Random();
-
             for(int graphIndex=0; graphIndex<lineGraphs.Length; graphIndex++)
             {
                 Rect lineGraphRect = new(dirtyRect.X, dirtyRect.Y,dirtyRect.Width, dirtyRect.Height);
@@ -81,7 +44,6 @@ namespace Finalproject230.Models
                 //DrawBarGraph(canvas, lineGraphRect, lineGraphs[graphIndex],graphIndex);
             }
         }
-
         private void DrawBarGraph(ICanvas canvas, Rect lineGraphRect, BaseGraphData barGraph, int graphNumber)
         {
             int barWidth = 10;
@@ -91,7 +53,6 @@ namespace Finalproject230.Models
             canvas.StrokeSize = barWidth;
             canvas.DrawLine(barGraphLocation, graphHeight, barGraphLocation, barGraph.Yaxis);
         }
-
         private void DrawLineGraph(ICanvas canvas, RectF dirtyRect, BaseGraphData lineGraph)
         {
             if(lineGraph.Xaxis < 2)

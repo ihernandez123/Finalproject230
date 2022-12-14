@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Finalproject230.Models
 {
-    public class BaseGraphData
+    public class BaseGraphData          // this class of the project is required for establish the x and y values in the graph
     {
         public int Yaxis { get; set; } = 0;
         public int Yaxis1 { get; set; } = 0;
@@ -17,14 +17,9 @@ namespace Finalproject230.Models
         public Color lineColor { get; set; }
         public int lineSize { get; set; }
         public bool newGraph { get; set; } = true;
-
         //default constructor
-
         public BaseGraphData()
-        {
-
-        }
-
+        {                   }
         //constructor
         public BaseGraphData(
             int Yaxis,
@@ -42,7 +37,5 @@ namespace Finalproject230.Models
             this.lineSize = lineSize;
             this.newGraph = newGraph;
         }
-
-
     }
 }

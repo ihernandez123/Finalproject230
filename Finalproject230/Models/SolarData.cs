@@ -18,9 +18,7 @@ namespace Finalproject230.Models
         public double[] analogVoltage = new double[6];
         private static double ResistorValue;
         public SolarData()
-        {
-            ResistorValue = 100;
-        }
+        {            ResistorValue = 100;        }
         public void ParseSolarData(string newPacket)
         {
             if (newPacket.Length > 37)
@@ -43,33 +41,21 @@ namespace Finalproject230.Models
             }
             return voltageToAverage;
         }
-
         public string GetCurrent(double an1, double an2)
-        {
-            double _an1 = (((an1 - an2) * 3.3) / 3301);
+        {   double _an1 = (((an1 - an2) * 3.3) / 3301);
             _an1 = (_an1 * 1000) / ResistorValue;
-            return _an1.ToString(" 0.00 mA");
-        }
-
+            return _an1.ToString(" 0.00 mA");        }
         public string GetLedCurrent(double an1, double an2)
-        {
-            double _an1 = ((an1 * 3.3) / 3301) - ((an2 * 3.3) / 3301);
+        {   double _an1 = ((an1 * 3.3) / 3301) - ((an2 * 3.3) / 3301);
             if (_an1 > 0)
-            {
-                _an1 = (_an1 / ResistorValue) * 1000;
-                return _an1.ToString(" 0.00 'mA'");
-            }
+            {   _an1 = (_an1 / ResistorValue) * 1000;
+                return _an1.ToString(" 0.00 'mA'");            }
             else
-            {
-                _an1 = 0;
-                return _an1.ToString(" 0.00 'mA'");
-            }
+            {   _an1 = 0;
+                return _an1.ToString(" 0.00 'mA'");            }
         }
-
         public string GetVoltage(double analogValue)
-        {
-            double _analogValue = (analogValue * 3.3) / 3301;
-            return _analogValue.ToString(" 0.00 V");
-        }
+        {   double _analogValue = (analogValue * 3.3) / 3301;
+            return _analogValue.ToString(" 0.00 V");        }
     }
 }

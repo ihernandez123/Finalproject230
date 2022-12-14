@@ -23,9 +23,7 @@ public partial class RawDataView : ContentPage
     private int chkSumError = 0;        // checking the sum error
 
     Random random = new Random();
-
     StringBuilder stringBuilderSend = new StringBuilder("###1111196");
-
     SerialPort serialPort = new SerialPort();
 
     public RawDataView()
@@ -185,7 +183,6 @@ public partial class RawDataView : ContentPage
         oldPacketNumber = -1;           // first values
         newPacketNumber = 0;            // first values
     }
-
     private void btnSend_Clicked(object sender, EventArgs e) // function for managing the button send
     {
         try     // send the packet
@@ -204,16 +201,12 @@ public partial class RawDataView : ContentPage
 
     private void btnBit3_Clicked(object sender, EventArgs e)        
     {        ButtonClicked(3); }     // Button LED 4                       
-
     private void btnBit2_Clicked(object sender, EventArgs e)
     {        ButtonClicked(2); }     // Button LED 3
-
     private void btnBit1_Clicked(object sender, EventArgs e)
     {        ButtonClicked(1); }     // Button LED 2
-
     private void btnBit0_Clicked(object sender, EventArgs e)
     {        ButtonClicked(0); }     // Button LED 1
-
     private void ButtonClicked(int i)       // function for making the LEDs pictures buttons
     {
         Button[] btnBit = new Button[] { btnBit0, btnBit1, btnBit2, btnBit3 };
@@ -247,7 +240,6 @@ public partial class RawDataView : ContentPage
         }
         SendPacket();       // at the end send the packet
     }
-
     private void SendPacket()     // function for sending bynary values   
     {
         int calSendChkSum = 0;      // cheking the chkSum
@@ -270,13 +262,10 @@ public partial class RawDataView : ContentPage
 
     private void Label_SizeChanged(object sender, EventArgs e)
     {    }      // this fucntion is not used in this project
-
     private void labelBatteryCurrent_Focused(object sender, FocusEventArgs e)
     { }      // this fucntion is not used in this project
-
     private void imgLED1_Clicked(object sender, EventArgs e)
     {        ButtonClicked(0);    }// assignation of the button 1 to the LED1
-
     private void imgLED2_Clicked(object sender, EventArgs e)
     {        ButtonClicked(1);    }// assignation of the button 2 to the LED2
 }

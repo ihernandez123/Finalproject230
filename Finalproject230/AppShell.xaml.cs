@@ -11,7 +11,6 @@ public partial class AppShell : Shell
         InitializeComponent();      // Shell running
         Routing.RegisterRoute(nameof(View.RawDataView), typeof(View.RawDataView));     // The first page "Raw Data View"
     }
-
     private void Label_SizeChanged(object sender, EventArgs e)      // not used in this project
     {
     }
